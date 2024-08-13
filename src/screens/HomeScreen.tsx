@@ -64,7 +64,7 @@ const HomeScreen = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.ScrollViewFlex}>
         {/* Header */}
-        <HeaderBar title="Home Screen" />
+        <HeaderBar />
       </ScrollView>
     </View>
   );
