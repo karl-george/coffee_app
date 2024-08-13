@@ -93,6 +93,34 @@ const HomeScreen = () => {
         </View>
 
         {/* Categories Scroller */}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.categoryScrollView}>
+          {categories.map((category: string, index: number) => (
+            <View key={index} style={styles.viewContainer}>
+              <TouchableOpacity
+                onPress={() => {
+                  setCategoryIndex({index, category});
+                  setSortedCoffee([...getCoffeeList(category, CoffeeList)]);
+                }}
+                style={styles.categoryItem}>
+                <Text
+                  style={[
+                    styles.categoryText,
+                    categoryIndex.index === index && {
+                      color: COLORS.primaryOrangeHex,
+                    },
+                  ]}>
+                  {category}
+                </Text>
+                {categoryIndex.index === index && (
+                  <View style={styles.activeCategory}></View>
+                )}
+              </TouchableOpacity>
+            </View>
+          ))}
+        </ScrollView>
       </ScrollView>
     </View>
   );
@@ -125,6 +153,27 @@ const styles = StyleSheet.create({
     fontSize: FONTSIZE.size_14,
     color: COLORS.primaryWhiteHex,
     flex: 1,
+  },
+  categoryScrollView: {
+    paddingHorizontal: SPACING.space_20,
+    marginBottom: SPACING.space_20,
+  },
+  viewContainer: {
+    paddingHorizontal: SPACING.space_15,
+  },
+  categoryText: {
+    fontSize: FONTSIZE.size_14,
+    color: COLORS.primaryLightGreyHex,
+    marginBottom: SPACING.space_4,
+  },
+  activeCategory: {
+    height: SPACING.space_10,
+    width: SPACING.space_10,
+    borderRadius: BORDERRADIUS.radius_10,
+    backgroundColor: COLORS.primaryOrangeHex,
+  },
+  categoryItem: {
+    alignItems: 'center',
   },
 });
 
