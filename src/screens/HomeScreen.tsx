@@ -1,8 +1,16 @@
-import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import {useStore} from '../store/store';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
-import {COLORS} from '../theme/theme';
+import {BORDERRADIUS, COLORS, FONTSIZE, SPACING} from '../theme/theme';
 import HeaderBar from '../components/HeaderBar';
 
 /**
@@ -46,7 +54,7 @@ const HomeScreen = () => {
   const [categories, setCategories] = useState(
     getCategoriesFromData(CoffeeList),
   );
-  const [searchText, setSearchText] = useState(undefined);
+  const [searchText, setSearchText] = useState('');
   const [categoryIndex, setCategoryIndex] = useState({
     index: 0,
     category: categories[0],
@@ -65,6 +73,26 @@ const HomeScreen = () => {
         contentContainerStyle={styles.ScrollViewFlex}>
         {/* Header */}
         <HeaderBar />
+
+        <Text style={styles.title}>Find the best{'\n'}coffee for you</Text>
+
+        {/* Search Bar */}
+        <View style={styles.inputContainer}>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={{color: COLORS.primaryWhiteHex, paddingLeft: 12}}>
+              S
+            </Text>
+          </TouchableOpacity>
+          <TextInput
+            placeholder="Find your coffee..."
+            placeholderTextColor={COLORS.primaryLightGreyHex}
+            value={searchText}
+            onChangeText={text => setSearchText(text)}
+            style={styles.input}
+          />
+        </View>
+
+        {/* Categories Scroller */}
       </ScrollView>
     </View>
   );
@@ -77,6 +105,26 @@ const styles = StyleSheet.create({
   },
   ScrollViewFlex: {
     flexGrow: 1,
+  },
+  title: {
+    fontSize: FONTSIZE.size_28,
+    color: COLORS.primaryWhiteHex,
+    fontWeight: 'semibold',
+    paddingLeft: SPACING.space_30,
+  },
+  inputContainer: {
+    margin: SPACING.space_30,
+    borderRadius: BORDERRADIUS.radius_20,
+    backgroundColor: COLORS.primaryDarkGreyHex,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  input: {
+    height: SPACING.space_20 * 3,
+    fontSize: FONTSIZE.size_14,
+    color: COLORS.primaryWhiteHex,
+    flex: 1,
   },
 });
 
