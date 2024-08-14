@@ -183,22 +183,31 @@ const HomeScreen = ({navigation}: any) => {
           contentContainerStyle={styles.coffeeList}
           data={sortedCoffee}
           keyExtractor={(item: any) => item.id}
-          renderItem={({item}) => (
-            <TouchableOpacity onPress={navigation.push('Details')}>
-              <CoffeeCard
-                id={item.id}
-                index={item.index}
-                type={item.type}
-                roasted={item.roasted}
-                name={item.name}
-                special_ingredient={item.special_ingredient}
-                average_rating={item.average_rating}
-                price={item.prices[2]}
-                image="https://images.unsplash.com/photo-1495774856032-8b90bbb32b32?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                buttonPressHandler={() => {}}
-              />
-            </TouchableOpacity>
-          )}
+          renderItem={({item}) => {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.push('Details', {
+                    index: item.index,
+                    id: item.id,
+                    type: item.type,
+                  });
+                }}>
+                <CoffeeCard
+                  id={item.id}
+                  index={item.index}
+                  type={item.type}
+                  roasted={item.roasted}
+                  image="https://images.unsplash.com/photo-1495774856032-8b90bbb32b32?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  name={item.name}
+                  special_ingredient={item.special_ingredient}
+                  average_rating={item.average_rating}
+                  price={item.prices[2]}
+                  buttonPressHandler={() => {}}
+                />
+              </TouchableOpacity>
+            );
+          }}
         />
 
         <Text
@@ -222,22 +231,31 @@ const HomeScreen = ({navigation}: any) => {
           ]}
           data={BeanList}
           keyExtractor={(item: any) => item.id}
-          renderItem={({item}) => (
-            <TouchableOpacity onPress={navigation.push('Details')}>
-              <CoffeeCard
-                id={item.id}
-                index={item.index}
-                type={item.type}
-                roasted={item.roasted}
-                name={item.name}
-                special_ingredient={item.special_ingredient}
-                average_rating={item.average_rating}
-                price={item.prices[2]}
-                image="https://images.unsplash.com/photo-1525088553748-01d6e210e00b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29mZmVlfGVufDB8fDB8fHwy"
-                buttonPressHandler={() => {}}
-              />
-            </TouchableOpacity>
-          )}
+          renderItem={({item}) => {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.push('Details', {
+                    index: item.index,
+                    id: item.id,
+                    type: item.type,
+                  });
+                }}>
+                <CoffeeCard
+                  id={item.id}
+                  index={item.index}
+                  type={item.type}
+                  roasted={item.roasted}
+                  image="https://images.unsplash.com/photo-1525088553748-01d6e210e00b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29mZmVlfGVufDB8fDB8fHwy"
+                  name={item.name}
+                  special_ingredient={item.special_ingredient}
+                  average_rating={item.average_rating}
+                  price={item.prices[2]}
+                  buttonPressHandler={() => {}}
+                />
+              </TouchableOpacity>
+            );
+          }}
         />
       </ScrollView>
     </View>
