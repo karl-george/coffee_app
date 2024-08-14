@@ -9,8 +9,6 @@ const DetailsScreen = ({navigation, route}: any) => {
     route.params.type == 'Coffee' ? state.CoffeeList : state.BeanList,
   )[route.params.index];
 
-  console.log(itemOfIndex.favorite);
-
   const addToFavoriteList = useStore((state: any) => state.addToFavoriteList);
 
   const backHandler = () => {
