@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {useStore} from '../store/store';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {BORDERRADIUS, COLORS, FONTSIZE, SPACING} from '../theme/theme';
@@ -67,6 +67,8 @@ const HomeScreen = () => {
 
   const tabBarHeight = useBottomTabBarHeight();
 
+  const listRef: any = useRef<FlatList>();
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={COLORS.primaryBlackHex} />
@@ -92,6 +94,18 @@ const HomeScreen = () => {
             onChangeText={text => setSearchText(text)}
             style={styles.input}
           />
+          {searchText.length > 0 && (
+            <TouchableOpacity>
+              <Text
+                style={{
+                  color: COLORS.primaryLightGreyHex,
+                  fontSize: 18,
+                  marginHorizontal: SPACING.space_20,
+                }}>
+                X
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
 
         {/* Categories Scroller */}
@@ -105,6 +119,7 @@ const HomeScreen = () => {
                 onPress={() => {
                   setCategoryIndex({index, category});
                   setSortedCoffee([...getCoffeeList(category, CoffeeList)]);
+                  listRef?.current.scrollToOffset({animated: true, offset: 0});
                 }}
                 style={styles.categoryItem}>
                 <Text
@@ -126,6 +141,7 @@ const HomeScreen = () => {
 
         {/* Coffee List */}
         <FlatList
+          ref={listRef}
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.coffeeList}
@@ -159,6 +175,7 @@ const HomeScreen = () => {
           }}>
           Coffee Beans
         </Text>
+
         {/* Bean List */}
         <FlatList
           horizontal
