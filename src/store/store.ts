@@ -64,6 +64,26 @@ export const useStore = create(
             state.CartPrice = totalPrice.toFixed(2).toString();
           }),
         ),
+      addToFavoriteList: (type: string, id: string) =>
+        set(
+          produce(state => {
+            if (type == 'Coffee') {
+              state.CoffeeList.map((coffee: any) => {
+                if (coffee.id == id) {
+                  coffee.favourite = !coffee.favourite;
+                  state.FavoritesList.unshift(coffee.id);
+                }
+              });
+            } else if (type == 'Bean') {
+              state.BeanList.map((bean: any) => {
+                if (bean.id == id) {
+                  bean.favourite = !bean.favourite;
+                  state.FavoritesList.unshift(bean.id);
+                }
+              });
+            }
+          }),
+        ),
     }),
     {
       name: 'coffee-app',
