@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   FlatList,
   ScrollView,
   StatusBar,
@@ -96,7 +97,6 @@ const HomeScreen = () => {
         contentContainerStyle={styles.ScrollViewFlex}>
         {/* Header */}
         <HeaderBar />
-
         <Text style={styles.title}>Find the best{'\n'}coffee for you</Text>
 
         {/* Search Bar */}
@@ -113,7 +113,10 @@ const HomeScreen = () => {
             placeholder="Find your coffee..."
             placeholderTextColor={COLORS.primaryLightGreyHex}
             value={searchText}
-            onChangeText={text => setSearchText(text)}
+            onChangeText={text => {
+              setSearchText(text);
+              searchCoffee(text);
+            }}
             style={styles.input}
           />
           {searchText.length > 0 && (
@@ -165,6 +168,17 @@ const HomeScreen = () => {
         <FlatList
           ref={listRef}
           horizontal
+          ListEmptyComponent={
+            <View
+              style={{
+                width: Dimensions.get('window').width - SPACING.space_30 * 2,
+                alignItems: 'center',
+                justifyContent: 'center',
+                paddingVertical: SPACING.space_36 * 3.2,
+              }}>
+              <Text style={styles.categoryText}>No coffee available</Text>
+            </View>
+          }
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.coffeeList}
           data={sortedCoffee}
