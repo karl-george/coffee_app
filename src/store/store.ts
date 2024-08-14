@@ -14,6 +14,40 @@ export const useStore = create(
       FavoritesList: [],
       CartList: [],
       OrderHistoryList: [],
+      addToCart: (cartItem: any) =>
+        set(
+          produce(state => {
+            let found = false;
+            state.CartList.map((item: any) => {
+              if (item.id == cartItem.id) {
+                found = true;
+                let size = false;
+                state.CartList.prices.map((price: any) => {
+                  if (price.size == cartItem.prices[0].size) {
+                    size = true;
+                    price.quantity++;
+                  }
+                });
+                if (!size) {
+                  item.prices.push(cartItem.prices[0]);
+                }
+                item.price.sort((a: any, b: any) => {
+                  if (a.size > b.size) {
+                    return -1;
+                  }
+                  if (a.size < b.size) {
+                    return 1;
+                  }
+                  return 0;
+                });
+              }
+            });
+            if (!found) {
+              state.CartList.push(cartItem);
+            }
+          }),
+        ),
+      calculateCartPrice: () => {},
     }),
     {
       name: 'coffee-app',
