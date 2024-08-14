@@ -1,4 +1,5 @@
 import {
+  FlatList,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -12,6 +13,7 @@ import {useStore} from '../store/store';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {BORDERRADIUS, COLORS, FONTSIZE, SPACING} from '../theme/theme';
 import HeaderBar from '../components/HeaderBar';
+import CoffeeCard from '../components/CoffeeCard';
 
 /**
  * Generates an array of categories based on the data provided.
@@ -121,6 +123,32 @@ const HomeScreen = () => {
             </View>
           ))}
         </ScrollView>
+
+        {/* Coffee List */}
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.coffeeList}
+          data={sortedCoffee}
+          keyExtractor={(item: any) => item.id}
+          renderItem={({item}) => (
+            <TouchableOpacity onPress={() => {}}>
+              <CoffeeCard
+                id={item.id}
+                index={item.index}
+                type={item.type}
+                roasted={item.roasted}
+                name={item.name}
+                special_ingredient={item.special_ingredient}
+                average_rating={item.average_rating}
+                price={item.prices[2]}
+                buttonPressHandler={() => {}}
+              />
+            </TouchableOpacity>
+          )}
+        />
+
+        {/* Bean List */}
       </ScrollView>
     </View>
   );
@@ -174,6 +202,11 @@ const styles = StyleSheet.create({
   },
   categoryItem: {
     alignItems: 'center',
+  },
+  coffeeList: {
+    gap: SPACING.space_20,
+    paddingVertical: SPACING.space_20,
+    paddingHorizontal: SPACING.space_30,
   },
 });
 
