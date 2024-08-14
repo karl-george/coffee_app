@@ -70,8 +70,8 @@ export const useStore = create(
             if (type == 'Coffee') {
               state.CoffeeList.map((coffee: any) => {
                 if (coffee.id == id) {
-                  coffee.favourite = !coffee.favourite;
-                  if (coffee.favourite) {
+                  coffee.favorite = !coffee.favorite;
+                  if (coffee.favorite) {
                     state.FavoritesList.unshift(coffee.id);
                   } else {
                     state.FavoritesList.splice(
@@ -84,8 +84,8 @@ export const useStore = create(
             } else if (type == 'Bean') {
               state.BeanList.map((bean: any) => {
                 if (bean.id == id) {
-                  bean.favourite = !bean.favourite;
-                  if (bean.favourite) {
+                  bean.favorite = !bean.favorite;
+                  if (bean.favorite) {
                     state.FavoritesList.unshift(bean.id);
                   } else {
                     state.FavoritesList.splice(
