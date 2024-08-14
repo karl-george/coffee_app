@@ -45,10 +45,7 @@ const CoffeeCard = ({
       end={{x: 1, y: 1}}
       style={styles.linearGradient}
       colors={[COLORS.primaryGreyHex, COLORS.primaryBlackHex]}>
-      <ImageBackground
-        src="https://images.unsplash.com/photo-1495774856032-8b90bbb32b32?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        style={styles.cardImg}
-        resizeMode="cover">
+      <ImageBackground src={image} style={styles.cardImg} resizeMode="cover">
         <View style={styles.cardRatingContainer}>
           <Text style={styles.ratingText}>{average_rating}</Text>
         </View>
