@@ -9,8 +9,16 @@ const DetailsScreen = ({navigation, route}: any) => {
     route.params.type == 'Coffee' ? state.CoffeeList : state.BeanList,
   )[route.params.index];
 
+  console.log(itemOfIndex.favorite);
+
+  const addToFavoriteList = useStore((state: any) => state.addToFavoriteList);
+
   const backHandler = () => {
     navigation.goBack();
+  };
+
+  const toggleFavorite = (type: string, id: string) => {
+    addToFavoriteList(type, id);
   };
 
   return (
@@ -32,7 +40,7 @@ const DetailsScreen = ({navigation, route}: any) => {
           ratings_count={itemOfIndex.ratings_count}
           roasted={itemOfIndex.roasted}
           backHandler={backHandler}
-          toggleFavorite={() => {}}
+          toggleFavorite={toggleFavorite}
         />
       </ScrollView>
     </View>

@@ -21,7 +21,7 @@ interface Props {
   ratings_count: string;
   roasted: string;
   backHandler?: () => void;
-  toggleFavorite: () => void;
+  toggleFavorite: (type: string, id: string) => void;
 }
 
 const ImageBackgroundInfo = ({
@@ -49,7 +49,7 @@ const ImageBackgroundInfo = ({
                 Back
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => toggleFavorite(type, id)}>
               <Text
                 style={{
                   color: favorite
@@ -63,7 +63,7 @@ const ImageBackgroundInfo = ({
           </View>
         ) : (
           <View style={styles.headerBar}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => toggleFavorite(type, id)}>
               <Text
                 style={{
                   color: favorite
