@@ -71,14 +71,28 @@ export const useStore = create(
               state.CoffeeList.map((coffee: any) => {
                 if (coffee.id == id) {
                   coffee.favourite = !coffee.favourite;
-                  state.FavoritesList.unshift(coffee.id);
+                  if (coffee.favourite) {
+                    state.FavoritesList.unshift(coffee.id);
+                  } else {
+                    state.FavoritesList.splice(
+                      state.FavoritesList.indexOf(id),
+                      1,
+                    );
+                  }
                 }
               });
             } else if (type == 'Bean') {
               state.BeanList.map((bean: any) => {
                 if (bean.id == id) {
                   bean.favourite = !bean.favourite;
-                  state.FavoritesList.unshift(bean.id);
+                  if (bean.favourite) {
+                    state.FavoritesList.unshift(bean.id);
+                  } else {
+                    state.FavoritesList.splice(
+                      state.FavoritesList.indexOf(id),
+                      1,
+                    );
+                  }
                 }
               });
             }
