@@ -69,6 +69,25 @@ const HomeScreen = () => {
 
   const listRef: any = useRef<FlatList>();
 
+  const searchCoffee = (search: string) => {
+    if (search != '') {
+      listRef?.current.scrollToOffset({animated: true, offset: 0});
+      setCategoryIndex({index: 0, category: categories[0]});
+      setSortedCoffee([
+        ...CoffeeList.filter((item: any) =>
+          item.name.toLowerCase().includes(search.toLowerCase()),
+        ),
+      ]);
+    }
+  };
+
+  const resetSearch = () => {
+    listRef?.current.scrollToOffset({animated: true, offset: 0});
+    setCategoryIndex({index: 0, category: categories[0]});
+    setSortedCoffee([...CoffeeList]);
+    setSearchText('');
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={COLORS.primaryBlackHex} />
@@ -82,7 +101,10 @@ const HomeScreen = () => {
 
         {/* Search Bar */}
         <View style={styles.inputContainer}>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity
+            onPress={() => {
+              searchCoffee(searchText);
+            }}>
             <Text style={{color: COLORS.primaryWhiteHex, paddingLeft: 12}}>
               S
             </Text>
@@ -95,7 +117,7 @@ const HomeScreen = () => {
             style={styles.input}
           />
           {searchText.length > 0 && (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => resetSearch()}>
               <Text
                 style={{
                   color: COLORS.primaryLightGreyHex,
