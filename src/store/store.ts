@@ -47,7 +47,23 @@ export const useStore = create(
             }
           }),
         ),
-      calculateCartPrice: () => {},
+      calculateCartPrice: () =>
+        set(
+          produce(state => {
+            let totalPrice = 0;
+
+            state.CartList.map((item: any) => {
+              let tempPrice = 0;
+
+              item.prices.map((price: any) => {
+                tempPrice += parseFloat(price.price) * price.quantity;
+              });
+              item.ItemPrice = tempPrice.toFixed(2).toString();
+              totalPrice += tempPrice;
+            });
+            state.CartPrice = totalPrice.toFixed(2).toString();
+          }),
+        ),
     }),
     {
       name: 'coffee-app',
