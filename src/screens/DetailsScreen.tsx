@@ -118,6 +118,7 @@ const styles = StyleSheet.create({
   },
   scrollViewFlex: {
     flexGrow: 1,
+    justifyContent: 'space-between',
   },
   footer: {
     padding: SPACING.space_30,
