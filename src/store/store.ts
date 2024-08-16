@@ -31,7 +31,7 @@ export const useStore = create(
                 if (!size) {
                   item.prices.push(cartItem.prices[0]);
                 }
-                item.price.sort((a: any, b: any) => {
+                item.prices.sort((a: any, b: any) => {
                   if (a.size > b.size) {
                     return -1;
                   }
