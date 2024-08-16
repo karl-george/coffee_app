@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import {COLORS, SPACING} from '../theme/theme';
+import {BORDERRADIUS, COLORS, FONTSIZE, SPACING} from '../theme/theme';
 
 interface Props {
   enableBackHandler: boolean;
@@ -76,6 +76,32 @@ const ImageBackgroundInfo = ({
             </TouchableOpacity>
           </View>
         )}
+
+        <View style={styles.footerContainer}>
+          <View style={styles.footerInner}>
+            <View style={styles.containerRow}>
+              <View>
+                <Text style={styles.title}>{name}</Text>
+                <Text style={styles.subtitle}>{special_ingredient}</Text>
+              </View>
+              <View style={styles.itemProps}>
+                <View style={styles.propertyFirst}>
+                  <Text style={{color: COLORS.primaryOrangeHex}}>{type}</Text>
+                </View>
+              </View>
+            </View>
+
+            <View style={styles.containerRow}>
+              <View style={styles.ratingContainer}>
+                <Text style={styles.ratingText}>{average_rating}</Text>
+                <Text style={styles.ratingCount}>({ratings_count})</Text>
+              </View>
+              <View style={styles.roastedContainer}>
+                <Text style={styles.roastedText}>{roasted}</Text>
+              </View>
+            </View>
+          </View>
+        </View>
       </ImageBackground>
     </View>
   );
@@ -98,6 +124,70 @@ const styles = StyleSheet.create({
     width: '100%',
     aspectRatio: 20 / 25,
     justifyContent: 'space-between',
+  },
+  footerContainer: {
+    paddingVertical: SPACING.space_24,
+    paddingHorizontal: SPACING.space_30,
+    backgroundColor: COLORS.primaryBlackRGBA,
+    borderTopLeftRadius: BORDERRADIUS.radius_20,
+    borderTopRightRadius: BORDERRADIUS.radius_20,
+  },
+  footerInner: {
+    justifyContent: 'space-between',
+    gap: SPACING.space_15,
+  },
+  containerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  title: {
+    fontWeight: 'semibold',
+    fontSize: FONTSIZE.size_24,
+    color: COLORS.primaryWhiteHex,
+  },
+  subtitle: {
+    fontSize: FONTSIZE.size_12,
+    color: COLORS.primaryWhiteHex,
+  },
+  itemProps: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.space_20,
+  },
+  propertyFirst: {
+    height: 55,
+    width: 55,
+    borderRadius: BORDERRADIUS.radius_15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.primaryBlackHex,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    gap: SPACING.space_10,
+    alignItems: 'center',
+  },
+  ratingText: {
+    fontWeight: 'semibold',
+    fontSize: FONTSIZE.size_18,
+    color: COLORS.primaryWhiteHex,
+  },
+  ratingCount: {
+    fontSize: FONTSIZE.size_12,
+    color: COLORS.primaryWhiteHex,
+  },
+  roastedContainer: {
+    height: 55,
+    width: 55 * 2 + SPACING.space_20,
+    borderRadius: BORDERRADIUS.radius_15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.primaryBlackHex,
+  },
+  roastedText: {
+    fontSize: FONTSIZE.size_10,
+    color: COLORS.primaryWhiteHex,
   },
 });
 
