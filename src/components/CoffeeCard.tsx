@@ -56,7 +56,17 @@ const CoffeeCard = ({
         <Text style={styles.currency}>
           $ <Text style={{color: COLORS.primaryWhiteHex}}>{price.price}</Text>
         </Text>
-        <TouchableOpacity onPress={buttonPressHandler}>
+        <TouchableOpacity
+          onPress={buttonPressHandler({
+            id,
+            index: index,
+            type,
+            roasted,
+            image,
+            name,
+            special_ingredient,
+            prices: [{...price, quantity: 1}],
+          })}>
           <BGIcon
             name="add"
             color={COLORS.primaryWhiteHex}
