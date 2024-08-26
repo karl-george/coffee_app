@@ -140,6 +140,36 @@ export const useStore = create(
           }),
         );
       },
+      addToOrderHistoryList: () => {
+        set(
+          produce(state => {
+            let temp = state.CartList.reduce((acc: number, curr: any) => {
+              return acc + parseFloat(curr.ItemPrice);
+            }, 0);
+
+            if (state.OrderHistoryList.length > 0) {
+              state.OrderHistoryList.unshift({
+                OrderDate:
+                  new Date().toDateString() +
+                  ' ' +
+                  new Date().toLocaleTimeString(),
+                CartList: state.CartList,
+                CartListPrice: temp.toFixed(2).toString(),
+              });
+            } else {
+              state.OrderHistoryList.push({
+                OrderDate:
+                  new Date().toDateString() +
+                  ' ' +
+                  new Date().toLocaleTimeString(),
+                CartList: state.CartList,
+                CartListPrice: temp.toFixed(2).toString(),
+              });
+            }
+            state.CartList = [];
+          }),
+        );
+      },
     }),
     {
       name: 'coffee-app',
